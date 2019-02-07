@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>FrenglerAMP</title>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<meta name="author" content="Thomas Frengler" />
+
+		<!-- <script type="text/javascript" src="Player.js" ></script> -->
+		<!-- <link rel="stylesheet" type="text/css" href="" /> -->
+
+		<script>
+			const game = Object.create(null);
+			const entities = Object.create(null);
+			const components = Object.create(null);
+			var test = {};
+		</script>
+
+		<script type="text/javascript" src="EntityManager.js" ></script> -->
+		<script type="text/javascript" src="ComponentManager.js" ></script>
+		<script type="text/javascript" src="Entity.js" ></script>
+		<script type="text/javascript" src="entities/CircleMover.js" ></script>
+
+		<script>
+			window.onload = function() {
+				game.entityManager = EntityManager.init(components);
+				test = game.entityManager.create(entities.CircleMover);
+			};
+		</script>
+	</head>
+
+	<body>
+		
+
+	</body>
+</html>

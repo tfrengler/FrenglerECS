@@ -13,7 +13,7 @@ const EntityManager = (function () {
 
     const _create = function(type) {
 
-        const newEntity = new type(_IDCounter, _COMPONENT_MANAGER, _API, _COMPONENT_MANAGER.COMPONENT_AMOUNT)
+        const newEntity = new type(_IDCounter, _COMPONENT_MANAGER, _API, _COMPONENT_MANAGER.COMPONENT_AMOUNT);
         
         _IDCounter++;
         _ENTITIES_BY_ID.set(newEntity.ID, newEntity);
@@ -35,11 +35,8 @@ const EntityManager = (function () {
     };
 
     const _deleteFromSignature = function(id, signature) {
-        if (signature) {
-            const signatureGroup = _ENTITIES_BY_SIGNATURE.get(signature) || [];
-            console.log(signatureGroup);
-            signatureGroup.splice(signatureGroup.indexOf(id), 1);
-        }
+        const signatureGroup = _ENTITIES_BY_SIGNATURE.get(signature) || [];
+        signatureGroup.splice(signatureGroup.indexOf(id), 1);
     };
 
     const _getById = function(id) {
@@ -50,7 +47,6 @@ const EntityManager = (function () {
     };
 
     const _getByComponents = function(componentTypes) {
-
         const signature = new Uint8Array(66);
         componentTypes.forEach((typeID)=>{
             signature[typeID] = 1;
@@ -59,8 +55,8 @@ const EntityManager = (function () {
         return _ENTITIES_BY_SIGNATURE.get(signature.join("")) || null;
     };
     // TODO(thomas): might remove at a later date
-    const _exists = function() {
-
+    const _exists = function(id) {
+        return _ENTITIES_BY_ID.has(id);
     };
 
     // Event managers/callbacks

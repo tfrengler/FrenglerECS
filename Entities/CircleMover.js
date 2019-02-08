@@ -4,12 +4,13 @@ entities.CircleMover = function(id, componentManager, entityManager, componentAm
 
     Entity.call(this, id, componentManager, entityManager, componentAmount)
     
-    this.addComponent(1);
-    this.addComponent(3);
+    this.addComponent(components.Position);
+    this.addComponent(components.Appearance);
+    this.addComponent(components.Moveable);
 
     return Object.seal(this);
 };
 
 entities.CircleMover.prototype = Object.create(Entity.prototype);
-entities.CircleMover.prototype.TYPE_ID = 1;
-entities.CircleMover.TYPE_ID = 1;
+entities.CircleMover.prototype.TYPE_ID = 0;
+entities.CircleMover.TYPE_ID = 0;

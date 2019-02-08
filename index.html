@@ -6,6 +6,24 @@
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<meta name="author" content="Thomas Frengler" />
 
+		<style type="text/css">
+			canvas, #viewport {
+				width: 1200px;
+				height: 600px;
+			}
+			canvas {
+				position: absolute;
+			}
+			#viewport {
+				border-style: solid;
+				border-width: 2px;
+				border-color: black;
+				right: 0;
+				left: 0;
+				margin: auto;
+			}
+		</style>
+
 		<!-- <script type="text/javascript" src="Player.js" ></script> -->
 		<!-- <link rel="stylesheet" type="text/css" href="" /> -->
 
@@ -18,19 +36,56 @@
 
 		<script type="text/javascript" src="EntityManager.js" ></script> -->
 		<script type="text/javascript" src="ComponentManager.js" ></script>
+		<script type="text/javascript" src="components/Position.js" ></script>
+		<script type="text/javascript" src="components/Appearance.js" ></script>
+		<script type="text/javascript" src="components/Moveable.js" ></script>
 		<script type="text/javascript" src="Entity.js" ></script>
 		<script type="text/javascript" src="entities/CircleMover.js" ></script>
 
 		<script>
 			window.onload = function() {
+				document.getElementById("canvas").width = 1200;
+				document.getElementById("canvas").height = 600;
+
 				game.entityManager = EntityManager.init(components);
 				test = game.entityManager.create(entities.CircleMover);
+
+				// Init done
+				Object.freeze(game);
+				Object.freeze(entities);
+				Object.freeze(components);
 			};
 		</script>
 	</head>
 
 	<body>
 		
+		<!-- 
+
+			ECS flow:
+
+			EntityManager is the single point for creating, querying and deleting entities.
+			The entityManager is also the owner of components, through the component manager, which is instantiated
+			and usable internally. The ability to add and remove components to individual entities is exposed via
+			the entities themselves who receive a reference to the internal component manager.
+
+			- To create entities you use EntityManager.create() with a reference to the entity constructor (JS object)
+			- You get the entity returned and in the future will query the entity by ID or by components it has
+			- To get multiple entities by what components they have you call EntityManager.getByComponents() with an array of component constructors
+			- To get a single entity call EntityManager.getByID() with the entity id (that you hopefully kept around :P)
+			
+			- An entity is a container whose identity is defined by its data, via components.
+			- It should extend Entity and have a static TYPE_ID
+			- It should add components to itself during initialization
+
+		-->
+
+		<section id="viewport" >
+			<canvas id="canvas" width="1200" height="600" ></canvas>
+		</section>
+	
+		<section id="debug1" ></section>
+		<section id="debug2" ></section>
 
 	</body>
 </html>

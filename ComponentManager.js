@@ -10,7 +10,10 @@ const ComponentManager = function(componentPath) {
 
     // METHODS
 
-    this.add = function(newComponent, entityID) {
+    this.add = function(type, entityID, parameters) {
+
+        const newComponent = new type(...parameters);
+
         if (!this.COMPONENTS_BY_ENTITY_ID.has(entityID))
             this.COMPONENTS_BY_ENTITY_ID.set(entityID, new Array(this.COMPONENT_AMOUNT).fill(0));
 
@@ -27,7 +30,7 @@ const ComponentManager = function(componentPath) {
     // Constructor
 
     this.COMPONENT_PATH = componentPath || Object.create(null);
-    this.COMPONENT_AMOUNT = 33; // TODO(thomas): Reinstate once we actually have some components to work with - Object.keys(componentPath).length;
+    this.COMPONENT_AMOUNT = Object.keys(componentPath).length;
 
     return Object.seal(this);
 };
